@@ -111,7 +111,7 @@ func UserRegister(account string, password string) (*User, error) {
 func Userdetail(account string, password string) (*User, error) {
 	var user User
 
-	if err := DB.Where("account = ? and password = ?", account, password).Find(&user).Error; err != nil {
+	if err := DB.First(&user, "account = ? and password = ?", account, password).Error; err != nil {
 		return nil, err
 	} else {
 		return &user, nil
@@ -131,5 +131,4 @@ func CreateToken() string {
 	} else {
 		return tokenString
 	}
-
 }
